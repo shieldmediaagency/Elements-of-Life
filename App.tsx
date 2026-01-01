@@ -18,15 +18,15 @@ const App: React.FC = () => {
     title: string;
     cta: string;
     context: 'generic' | 'masterplan' | 'pricing' | 'virtual_tour';
-  }>({ 
-    isOpen: false, 
-    title: 'Request Briefing', 
+  }>({
+    isOpen: false,
+    title: 'Request Briefing',
     cta: 'Send Request',
     context: 'generic'
   });
 
   const openModal = (
-    title: string = 'Request Briefing', 
+    title: string = 'Request Briefing',
     cta: string = 'Send Request',
     context: 'generic' | 'masterplan' | 'pricing' | 'virtual_tour' = 'generic'
   ) => {
@@ -35,22 +35,22 @@ const App: React.FC = () => {
 
   return (
     <div className="bg-stone-950 min-h-screen text-stone-200 selection:bg-gold-500/30 font-sans">
-      
+
       <Navbar onOpenModal={(title, cta) => openModal(title, cta, 'virtual_tour')} />
 
       <main>
         <Hero onRequestInfo={() => openModal('Request Private Visit', 'Schedule Request', 'generic')} />
-        
+
         <TrustSignals />
-        
-        <ThePromise />
-        
+
         <Amenities />
 
         <Residences onRequestMasterPlan={() => openModal('Download Master Plan', 'Unlock Master Plan', 'masterplan')} />
-        
+
+        <ThePromise />
+
         <Timeline />
-        
+
         <Financials onRequestPriceSheet={() => openModal('Request Price Sheet', 'Unlock Price Sheet', 'pricing')} />
 
         <LocationSection />
@@ -67,23 +67,23 @@ const App: React.FC = () => {
           <div className="flex justify-center gap-6 mb-10">
             <span className="hover:text-stone-400 transition-colors cursor-pointer">Privacy Policy</span>
             <span className="hover:text-stone-400 transition-colors cursor-pointer">Disclaimer</span>
-             <span className="hover:text-stone-400 transition-colors cursor-pointer">Terms</span>
+            <span className="hover:text-stone-400 transition-colors cursor-pointer">Terms</span>
           </div>
-          
+
           <a href="https://unitern.com/" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center gap-3 group">
             <p className="text-[10px] uppercase tracking-widest text-stone-600 group-hover:text-stone-400 transition-colors">Managed By</p>
-            <img 
-                src="https://bz6u2h1ooc3ledmb.public.blob.vercel-storage.com/Unitern/managedby_untiern.webp" 
-                alt="Managed by Unitern" 
-                className="h-8 w-auto transition-transform duration-300 group-hover:scale-105"
+            <img
+              src="https://bz6u2h1ooc3ledmb.public.blob.vercel-storage.com/Unitern/managedby_untiern.webp"
+              alt="Managed by Unitern"
+              className="h-8 w-auto transition-transform duration-300 group-hover:scale-105"
             />
           </a>
         </footer>
       </main>
 
-      <InquiryModal 
-        isOpen={modalConfig.isOpen} 
-        onClose={() => setModalConfig({ ...modalConfig, isOpen: false })} 
+      <InquiryModal
+        isOpen={modalConfig.isOpen}
+        onClose={() => setModalConfig({ ...modalConfig, isOpen: false })}
         title={modalConfig.title}
         ctaText={modalConfig.cta}
         context={modalConfig.context}
