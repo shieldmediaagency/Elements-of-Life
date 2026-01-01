@@ -43,11 +43,11 @@ const App: React.FC = () => {
 
         <TrustSignals />
 
-        <Amenities />
+        <ThePromise />
 
         <Residences onRequestMasterPlan={() => openModal('Download Master Plan', 'Unlock Master Plan', 'masterplan')} />
 
-        <ThePromise />
+        <Amenities />
 
         <Timeline />
 
