@@ -45,13 +45,33 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenModal }) => {
     }
   };
 
+  // Logic: 
+  // 1. If menu is OPEN: Force transparent BG, remove border, but KEEP padding consistent with scroll state to prevent jumping.
+  // 2. If SCROLLED: Dark BG, Blur, Border, Smaller Padding.
+  // 3. If TOP: Transparent, Large Padding.
+  
+  const getNavClasses = () => {
+    const baseClasses = "fixed top-0 left-0 right-0 z-[60] transition-all duration-500 ease-in-out";
+    
+    if (mobileMenuOpen) {
+      // When menu is open, we want the overlay (z-50) to provide the background.
+      // We keep the padding consistent with 'isScrolled' to avoid a height jump if the user opens menu while scrolled.
+      // If they are at the top, it stays large.
+      return `${baseClasses} bg-transparent border-transparent ${isScrolled ? 'py-4' : 'py-6 md:py-8'}`;
+    }
+    
+    if (isScrolled) {
+      return `${baseClasses} bg-stone-950/95 backdrop-blur-md py-4 border-b border-stone-800 shadow-lg`;
+    }
+    
+    return `${baseClasses} bg-transparent py-6 md:py-8 border-b border-transparent`;
+  };
+
   return (
     <>
-      <nav className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-500 ${
-        isScrolled ? 'bg-stone-950/95 backdrop-blur-md py-4 border-b border-stone-800' : 'bg-transparent py-6 md:py-8'
-      }`}>
+      <nav className={getNavClasses()}>
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center relative z-[60]">
-          <div className="flex flex-col">
+          <div className="flex flex-col transition-opacity duration-300">
             <span className="text-white font-serif text-xl md:text-2xl tracking-tight leading-none">
               Elements <span className="text-stone-500 italic">of</span> Life
             </span>
@@ -77,7 +97,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenModal }) => {
 
           {/* Mobile Menu Toggle */}
           <button 
-            className="md:hidden text-white p-2 focus:outline-none z-[70]"
+            className="md:hidden text-white p-2 focus:outline-none z-[70] hover:text-gold-400 transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
           >
@@ -92,7 +112,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenModal }) => {
             {/* Background Pattern */}
             <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-stone-800 via-stone-950 to-stone-950 pointer-events-none"></div>
 
-            <nav className="flex flex-col items-center gap-8 relative z-10 w-full px-8 text-center">
+            <nav className="flex flex-col items-center gap-8 relative z-10 w-full px-8 text-center animate-in fade-in slide-in-from-bottom-4 duration-700 delay-100 fill-mode-both">
                 <button onClick={() => scrollToSection('philosophy')} className="text-2xl font-serif text-white hover:text-gold-400 transition-colors">Philosophy</button>
                 <button onClick={() => scrollToSection('amenities')} className="text-2xl font-serif text-white hover:text-gold-400 transition-colors">Amenities</button>
                 <button onClick={() => scrollToSection('residences')} className="text-2xl font-serif text-white hover:text-gold-400 transition-colors">Plans</button>

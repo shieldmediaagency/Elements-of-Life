@@ -5,11 +5,13 @@ import { SectionHeader } from './ui/SectionHeader';
 import { SectionWrapper } from './ui/SectionWrapper';
 
 interface LocationProps {
-  onOpenMap: () => void;
+  // No props needed now
 }
 
-export const LocationSection: React.FC<LocationProps> = ({ onOpenMap }) => {
+export const LocationSection: React.FC<LocationProps> = () => {
   const [activeCategory, setActiveCategory] = useState('Schools');
+
+  const MAP_LINK = "https://www.google.com/maps/search/?api=1&query=Elements+of+Life+Sannatammanahalli+Bengaluru";
 
   return (
     <SectionWrapper id="location" className="py-16 md:py-24">
@@ -87,13 +89,15 @@ export const LocationSection: React.FC<LocationProps> = ({ onOpenMap }) => {
                ></iframe>
                
                <div className="absolute inset-0 pointer-events-none flex items-center justify-center bg-stone-950/20 group-hover:bg-transparent transition-colors">
-                  <button 
-                      onClick={onOpenMap}
+                  <a 
+                      href={MAP_LINK}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="pointer-events-auto bg-white/10 backdrop-blur-md border border-white/20 text-white px-6 py-3 rounded-full flex items-center gap-2 hover:bg-white hover:text-stone-900 transition-all shadow-xl"
                   >
                       <MapPin size={16} />
                       View on Google Maps
-                  </button>
+                  </a>
                </div>
              </div>
           </div>

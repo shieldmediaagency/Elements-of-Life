@@ -53,7 +53,7 @@ const App: React.FC = () => {
         
         <Financials onRequestPriceSheet={() => openModal('Request Price Sheet', 'Unlock Price Sheet', 'pricing')} />
 
-        <LocationSection onOpenMap={() => openModal('Request Location Guide', 'Send Request', 'generic')} />
+        <LocationSection />
 
         <Gallery />
 
